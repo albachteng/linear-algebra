@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"reflect"
+	"github.com/albachteng/linear-algebra/hello"
 )
 
 type vector struct {
@@ -42,8 +43,6 @@ func (v *vector) scale(s float64) *vector {
 	return n
 }
 
-
-
 func main() {
 	unitVector := *newVector(1.0, 1.0)
 	fmt.Println(reflect.TypeOf(unitVector)) // expect vector
@@ -52,4 +51,5 @@ func main() {
 	fmt.Println(anotherVector.length())     // expect NOT root 2
 	fmt.Println(*unitVector.sumVector(*newVector(2, 3)))
 	fmt.Println(anotherVector.scale(-2.1).length())
+	fmt.Println(hello.Hello())
 }
