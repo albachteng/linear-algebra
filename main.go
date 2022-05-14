@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"reflect"
-	"github.com/albachteng/linear-algebra/hello"
 	"github.com/albachteng/linear-algebra/vector"
 )
 
@@ -15,5 +14,4 @@ func main() {
 	fmt.Println(anotherVector.Length())     // expect NOT root 2
 	fmt.Println(*unitVector.SumVector(*vector.NewVector(2, 3)))
 	fmt.Println(anotherVector.Scale(-2.1).Length())
-	fmt.Println(hello.Hello())
 }
