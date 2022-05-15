@@ -21,5 +21,5 @@ func main() {
 	j := *vector.NewVector(3, 0)
 	matrix := *matrix.NewMatrix(i, j)
 	fmt.Println(matrix)
-	fmt.Println(*matrix.LinearTransform(anotherVector))
+	fmt.Println(*matrix.LinearTransform(anotherVector)) // expect 5,2
 }
