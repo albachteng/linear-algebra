@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 	"github.com/albachteng/linear-algebra/matrix"
 	"github.com/albachteng/linear-algebra/vector"
 )
