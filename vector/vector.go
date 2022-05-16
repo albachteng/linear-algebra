@@ -8,8 +8,7 @@ type Vector struct {
 
 /* takes two floats and returns a reference to a new vector */
 func NewVector(x, y float64) *Vector {
-	v := Vector{x, y}
-	return &v
+	return &Vector{x, y}
 }
 
 /* returns the numerical value of a vector's length property */

@@ -2,7 +2,6 @@ package matrix
 
 import (
 	"testing"
-	// "github.com/albachteng/linear-algebra/matrix"
 	"github.com/albachteng/linear-algebra/vector"
 )
 
