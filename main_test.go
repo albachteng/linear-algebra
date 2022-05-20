@@ -8,9 +8,9 @@ import (
 )
 
 func TestVector(t *testing.T) {
-	someVector := *vector.NewVector(-1, 2)
-	i := *vector.NewVector(1, -2)
-	j := *vector.NewVector(3, 0)
+	someVector := vector.Vector{-1, 2}
+	i := vector.Vector{1, -2}
+	j := vector.Vector{3, 0}
 	matrix := *matrix.NewMatrix(i, j)
 	got := *matrix.LinearTransform(someVector) // expect 5,2
 	if got.X != 5 || got.Y != 2 {
