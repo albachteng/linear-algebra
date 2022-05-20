@@ -11,10 +11,10 @@ func TestMatrix(t *testing.T) {
 	vector2 := vector.Vector{-2, 0}
 	vector3 := vector.Vector{0, 1}
 	vector4 := vector.Vector{2, 0}
-	rotation := NewMatrix(vector3, vector4)
-	shear := NewMatrix(vector1, vector2)
+	rotation := Matrix{vector3, vector4}
+	shear := &Matrix{vector1, vector2}
 	got := rotation.Composition(shear)
-	if got.iHat.X != 2.0 || got.iHat.Y != 1.0 {
-		t.Errorf("Composition iHat.X = %f, iHat.Y = %f, want 2", got.iHat.X, got.iHat.Y)
+	if got.IHat.X != 2.0 || got.IHat.Y != 1.0 {
+		t.Errorf("Composition iHat.X = %f, iHat.Y = %f, want 2", got.IHat.X, got.IHat.Y)
 	}
 }
