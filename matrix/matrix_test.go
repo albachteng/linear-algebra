@@ -2,6 +2,7 @@ package matrix
 
 import (
 	"testing"
+
 	"github.com/albachteng/linear-algebra/vector"
 )
 
@@ -12,8 +13,8 @@ func TestMatrix(t *testing.T) {
 	vector4 := *vector.NewVector(2, 0)
 	rotation := NewMatrix(vector3, vector4)
 	shear := NewMatrix(vector1, vector2)
-	got := int(rotation.Composition(shear).iHat.X)
-	if uint(got) != 2 {
-		t.Errorf("Composition iHat.X = %d, want 2", got)
+	got := rotation.Composition(shear)
+	if got.iHat.X != 2.0 || got.iHat.Y != 1.0 {
+		t.Errorf("Composition iHat.X = %f, iHat.Y = %f, want 2", got.iHat.X, got.iHat.Y)
 	}
 }
