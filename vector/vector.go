@@ -26,10 +26,14 @@ func (v *Vector) Scale(s float64) *Vector {
 	return &n
 }
 
+/* returns the slope of a given vector */
 func (v *Vector) Slope() float64 {
 	return v.Y / v.X
 }
 
+/* most vectors have a span of all of 2 dimensional space, 
+but when their slope is the same, their span is 1 dimension 
+- a single line. If both vectors are zero, their span is only the origin. */ 
 func GetSpan(a *Vector, b *Vector) uint8 {
 	if a.Slope() == 0 && b.Slope() == 0 {
 		return 0
