@@ -7,10 +7,10 @@ import (
 )
 
 func TestMatrix(t *testing.T) {
-	vector1 := vector.Vector{1, 1}
-	vector2 := vector.Vector{-2, 0}
-	vector3 := vector.Vector{0, 1}
-	vector4 := vector.Vector{2, 0}
+	vector1 := vector.Vector{X: 1, Y: 1}
+	vector2 := vector.Vector{X: -2, Y: 0}
+	vector3 := vector.Vector{X: 0, Y: 1}
+	vector4 := vector.Vector{X: 2, Y: 0}
 	rotation := Matrix{vector3, vector4}
 	shear := &Matrix{vector1, vector2}
 	got := rotation.Composition(shear)

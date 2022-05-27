@@ -19,15 +19,23 @@ func (v *Vector) SumVector(n Vector) *Vector {
 	return &Vector{x, y}
 }
 
-/* the same as above, but allows you to describe the vector on the fly */
-func (v *Vector) Add(x, y float64) *Vector {
-	n := Vector{x, y}
-	return v.SumVector(n)
-}
-
 /* multiplies the x and y values of a vector by a scalar (float)
 and returns a pointer to the new vector */
 func (v *Vector) Scale(s float64) *Vector {
 	n := Vector{v.X * s, v.Y * s}
 	return &n
+}
+
+func (v *Vector) Slope() float64 {
+	return v.Y / v.X
+}
+
+func GetSpan(a *Vector, b *Vector) uint8 {
+	if a.Slope() == 0 && b.Slope() == 0 {
+		return 0
+	}
+	if a.Slope() == b.Slope() {
+		return 1
+	}
+	return 2
 }
