@@ -19,10 +19,14 @@ func (m *Matrix) LinearTransform(v vector.Vector) *vector.Vector {
 	return x.SumVector(*y)
 }
 
-/* multiplies the matrix by another matrix to return a new one
-applies a rotation and then a shear, where s is the shear */
+/* multiplies the matrix by another matrix to return a new one */
 func (m *Matrix) Composition(s *Matrix) *Matrix {
 	i := m.LinearTransform(s.IHat)
 	j := m.LinearTransform(s.JHat)
 	return &Matrix{*i, *j}
+}
+
+/* returns the determinant of a transformation, represented by a Matrix */ 
+func (m *Matrix) DotProduct() float64 {
+	return m.IHat.X * m.JHat.Y - m.IHat.Y * m.JHat.X
 }

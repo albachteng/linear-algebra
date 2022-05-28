@@ -17,4 +17,9 @@ func TestMatrix(t *testing.T) {
 	if got.IHat.X != 2.0 || got.IHat.Y != 1.0 {
 		t.Errorf("Composition iHat.X = %f, iHat.Y = %f, want 2", got.IHat.X, got.IHat.Y)
 	}
+	det := Matrix{vector.Vector{X: 1, Y: 1}, vector.Vector{X: 2, Y: -1}}
+	dot := det.DotProduct()
+	if dot != -3.0 {
+		t.Errorf("Determinant is %f, expected 3", dot)
+	}
 }
