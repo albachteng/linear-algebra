@@ -1,6 +1,7 @@
 package matrix
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/albachteng/linear-algebra/vector"
@@ -28,20 +29,28 @@ func (m *Matrix) Composition(s *Matrix) *Matrix {
 	return &Matrix{*i, *j}
 }
 
-/* returns the determinant of a transformation, represented by a Matrix */
+/* returns the determinant of a transformation */
 func (m *Matrix) DotProduct() float64 {
 	return m.IHat.X*m.JHat.Y - m.IHat.Y*m.JHat.X
 }
 
-func (m *Matrix) Inverse() *Matrix {
-	determinant := 1/m.DotProduct()
+/* returns the inverse of a matrix
+of the form:
+	| a b |
+	| c d |
+*/
+func (m *Matrix) Inverse() (*Matrix, error) {
+	determinant := m.DotProduct()
+	if determinant == 0 {
+		return nil, errors.New("determinant is zero")
+	}
 	a := m.IHat.X
-	c := -1 * m.IHat.Y
 	b := -1 * m.JHat.X
+	c := -1 * m.IHat.Y
 	d := m.JHat.Y
 	fmt.Println(a, b, c, d)
 	iHat := vector.Vector{X: d, Y: c}
 	jHat := vector.Vector{X: b, Y: a}
-	return &Matrix{*iHat.Scale(determinant), *jHat.Scale(determinant)}
+	return &Matrix{*iHat.Scale(determinant), *jHat.Scale(determinant)}, nil
 
 }
