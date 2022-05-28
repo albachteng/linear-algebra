@@ -38,6 +38,7 @@ func (m *Matrix) DotProduct() float64 {
 of the form:
 	| a b |
 	| c d |
+if the determinant is zero, there is no inverse
 */
 func (m *Matrix) Inverse() (*Matrix, error) {
 	determinant := m.DotProduct()
@@ -52,5 +53,9 @@ func (m *Matrix) Inverse() (*Matrix, error) {
 	iHat := vector.Vector{X: d, Y: c}
 	jHat := vector.Vector{X: b, Y: a}
 	return &Matrix{*iHat.Scale(determinant), *jHat.Scale(determinant)}, nil
+}
 
+func (m *Matrix) SolveSystem(v *vector.Vector) (*vector.Vector, error) {
+	inverse, err := m.Inverse()
+	return inverse.LinearTransform(*v), err
 }
