@@ -1,8 +1,8 @@
 package vector
 
 import (
-	"math"
 	"errors"
+	"math"
 )
 
 type Vector []float64

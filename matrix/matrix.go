@@ -4,29 +4,35 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/albachteng/linear-algebra/vector"
+	. "github.com/albachteng/linear-algebra/vector"
 )
 
-/* a 2-dimensional matrix that describes
+/* a n-dimensional matrix that describes
 a linear transformation */
-type Matrix struct {
-	IHat vector.Vector
-	JHat vector.Vector
-}
+type Matrix []Vector
 
 /* on a given matrix and given a vector to transform,
 returns the transformed vector */
-func (m *Matrix) LinearTransform(v vector.Vector) *vector.Vector {
-	x := m.IHat.Scale(v.X)
-	y := m.JHat.Scale(v.Y)
-	return x.SumVector(*y)
+func (m Matrix) LinearTransform(v Vector) Vector {
+	scaledVectors := make([]Vector, 2)
+	for i, vec := range m {
+		if 
+		scaledVectors[i] = vec.Scale(v[i])
+	}
+	sum := scaledVectors[0]
+	for i := 1; i < len(scaledVectors); i++ {
+		sum.SumVector(scaledVectors[i])
+	}
+	return sum
 }
 
 /* multiplies the matrix by another matrix to return a new one */
-func (m *Matrix) Composition(s *Matrix) *Matrix {
-	i := m.LinearTransform(s.IHat)
-	j := m.LinearTransform(s.JHat)
-	return &Matrix{*i, *j}
+func (m Matrix) Composition(s Matrix) Matrix {
+	vecs := make([]Vector)
+	for i, v := range m {
+		vecs[i] = m.LinearTransform(v[i])
+	}
+	return Matrix{vecs}
 }
 
 /* returns the determinant of a transformation */
@@ -50,12 +56,12 @@ func (m *Matrix) Inverse() (*Matrix, error) {
 	c := -1 * m.IHat.Y
 	d := m.JHat.Y
 	fmt.Println(a, b, c, d)
-	iHat := vector.Vector{X: d, Y: c}
-	jHat := vector.Vector{X: b, Y: a}
-	return &Matrix{*iHat.Scale(determinant), *jHat.Scale(determinant)}, nil
+	iHat := Vector{X: d, Y: c}
+	jHat := Vector{X: b, Y: a}
+	return &Matrix{iHat.Scale(determinant), jHat.Scale(determinant)}, nil
 }
 
-func (m *Matrix) SolveSystem(v *vector.Vector) (*vector.Vector, error) {
+func (m *Matrix) SolveSystem(v Vector) (Vector, error) {
 	inverse, err := m.Inverse()
-	return inverse.LinearTransform(*v), err
+	return inverse.LinearTransform(v), err
 }
